@@ -2,8 +2,8 @@ import json
 from mitmproxy import ctx
 import os
 
-FOLDER = 'movies'
-os.path.exists(FOLDER) or os.makedirs(FOLDER)
+OUTPUT_FOLDER = 'movies'
+os.path.exists(OUTPUT_FOLDER) or os.makedirs(OUTPUT_FOLDER)
 
 
 def response(flow):
@@ -16,5 +16,5 @@ def response(flow):
         items = data.get('results')
         for item in items:
             ctx.log.info(str(item))
-            with open(f'{FOLDER}/{item["name"]}.json', 'w', encoding='utf-8') as f:
+            with open(f'{OUTPUT_FOLDER}/{item["name"]}.json', 'w', encoding='utf-8') as f:
                 f.write(json.dumps(item, ensure_ascii=False, indent=2))
